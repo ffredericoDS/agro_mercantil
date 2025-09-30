@@ -15,25 +15,25 @@
 
 #### Processo
 - Ferramentas: **Python** (`requests` + `BeautifulSoup`).
-- Script principal: **`1 - Scraping.py`**.
+- Script principal: **Scraping/`1 - Scraping.py`**.
 - Função: extrair tabelas, tratar preços e datas, salvar dados.
 - Desafios enfrentados: tabelas fragmentadas e necessidade de padronização.
 
 #### Dificuldades e Soluções
 - O site exibia apenas dados recentes (últimos 13 a 30 dias).
 - Não havia histórico completo disponível.
-- **Solução:** criei o script **`2 - Scraping_add_dados.py`**, que preencheu a tabela com dados dos últimos 2 anos.
-- **Resultado:** expansão da base de **250 linhas** com os dados reais do site para **5.369 registros**.
-- Arquivo Inicial(com dados reais do site): **`cepea_dados_1.csv`**.
-- Arquivo final: **`cepea_dados_2.csv`**.
+- **Solução:** criei o script **Scraping/`2 - Scraping_add_dados.py`**, que preencheu a tabela com dados dos últimos 2 anos.
+- **Resultado:** expansão da base de **172 linhas** com os dados reais do site para **7.482 registros**.
+- Arquivo Inicial(com dados reais do site): **RAW/`cepea_dados_1.csv`**.
+- Arquivo final: **RAW/`cepea_dados_2.csv`**.
 
 ---
 
 ## Estruturação da Camada RAW
 
 ### Organização atual
-- Estrutura local do projeto:
-![alt text](image.png)
+- Estrutura local do projeto atual (não final):
+<img width="292" height="238" alt="image" src="https://github.com/user-attachments/assets/d0c2684c-d6ab-4217-a629-a1eba24201d0" />
 
 - Objetivo da pasta RAW: armazenar os dados brutos exatamente como coletados, garantindo rastreabilidade e permitindo reprocessamento se necessário. Funciona como "matéria-prima" para camadas posteriores.
 
@@ -62,7 +62,10 @@ uso de S3 requer planejamento de custos e governança para evitar desperdício e
 ### Descrição da etapa
 - Criei tabelas normalizadas a partir dos dados coletados, separando informações de **commodities** e **registros** para melhorar organização e eficiência.
 - O processo foi realizado com scripts SQL, garantindo estrutura adequada para consultas futuras.
-- O preenchimento automático das tabelas foi feito com um script Python (`postgre.py`), que lê o arquivo **`cepea_dados_2.csv`** e insere os dados diretamente no banco.Automatizar a inserção via script Python aumenta eficiência e reduz erro humano
+- O preenchimento automático das tabelas foi feito com um script Python **PostgreSQL/`postgre.py`**, que lê o arquivo **RAW/`cepea_dados_2.csv`** e insere os dados diretamente no banco.Automatizar a inserção via script Python aumenta eficiência e reduz erro humano
+<img width="715" height="390" alt="image" src="https://github.com/user-attachments/assets/e1fb214e-932c-4b3c-a340-ee9b9765a4a3" />
+<img width="341" height="401" alt="image" src="https://github.com/user-attachments/assets/6b2a1253-b576-4de7-bd13-9208757537da" />
+<img width="719" height="582" alt="image" src="https://github.com/user-attachments/assets/3c89939b-7539-4ccc-b577-3752f1c14016" />
 
 ### Estrutura das tabelas
 - **commodities:** tabela com lista única de commodities.
@@ -72,10 +75,9 @@ uso de S3 requer planejamento de custos e governança para evitar desperdício e
 - Usei **id** como chave primária em ambas as tabelas, garantindo identificação única de registros e commodities.
 - Em `registros`, usei **commodity_id** como chave estrangeira, garantindo integridade referencial e evitando duplicação de dados.
 - Essa abordagem melhora a organização, evita inconsistências e facilita consultas com `JOIN`.
-
-### Observação 
-- A normalização garante clareza e evita redundância, mas em grandes volumes pode exigir consultas mais complexas.
-
+- 
+<img width="341" height="401" alt="image" src="https://github.com/user-attachments/assets/6b2a1253-b576-4de7-bd13-9208757537da" />
+<img width="719" height="582" alt="image" src="https://github.com/user-attachments/assets/3c89939b-7539-4ccc-b577-3752f1c14016" />
 ---
 ## Tratamento e ETL (Camada Processed)
 
@@ -92,16 +94,15 @@ uso de S3 requer planejamento de custos e governança para evitar desperdício e
 - Geração da tabela de commodities com IDs únicos e mapeamento para registros.
 
 ### Resultados
-- Arquivo tratado salvo como **`RAW/cepea_dados_3.csv`**.
+- Arquivo tratado salvo como **`PROCESSED/cepea_dados_3.csv`**.
 - Tabelas atualizadas no banco PostgreSQL:
   - `commodities_processados`
   - `registros_processados`
+<img width="1104" height="592" alt="image" src="https://github.com/user-attachments/assets/4e65fe82-392c-48e5-b2ac-32b967c11581" />
 
 ### observação da etapa:
 - O processo ETL garante que o banco contenha dados consistentes e organizados, essenciais para consultas eficientes.
 - Automatizar o ETL reduz erros manuais e facilita a atualização da base.
-- Limitação: mudanças futuras na estrutura dos dados originais exigirão ajustes no script ETL.
-- Melhoria possível: adicionar validações automáticas e logging para monitorar falhas durante o processamento.
 
 ---
 
@@ -125,11 +126,12 @@ objetivo -- organiza dados em camadas, permitindo melhor governança, rastreabil
 - Pode incluir agregações, métricas calculadas e modelos aplicados.
 - Objetivo: otimizar performance de análise e tomada de decisão.
 
+<img width="308" height="340" alt="image" src="https://github.com/user-attachments/assets/a10d405b-7d7f-47dd-a908-9db9db66a28c" />
 
 ### Observação 
 - Separar dados em camadas melhora rastreabilidade e facilita manutenção.
 - Essa organização facilita integração com ferramentas analíticas e sistemas em nuvem.
-- Em escala, o Data Lake pode ser hospedado em **AWS S3**, **Azure Data Lake** ou similar, com gerenciamento de versionamento e políticas de acesso.
+- Em escala, o Data Lake pode ser hospedado em **AWS S3**, **Azure Data Lake** ou similar, com gerenciamento de versionamento
 
 ---
 ## Análises SQL – Tendências e Indicadores
@@ -141,13 +143,25 @@ objetivo -- organiza dados em camadas, permitindo melhor governança, rastreabil
    - Uso da função `LAG` para calcular a variação percentual em relação ao mês anterior.
    - Resultado permite identificar tendências de preço e sazonalidades.
 
+<img width="658" height="434" alt="image" src="https://github.com/user-attachments/assets/70e96eab-768d-4439-a4a5-75b4c2b40491" />
+<img width="624" height="628" alt="image" src="https://github.com/user-attachments/assets/e765fd66-f71e-4e71-ac57-a132c4d31546" />
+
+
 2. **Produtos mais negociados**
    - Listagem dos 5 produtos com maior volume negociado no último ano.
    - Análise útil para entender a dinâmica de mercado e focar em commodities estratégicas.
 
+<img width="519" height="187" alt="image" src="https://github.com/user-attachments/assets/d9dfd5d1-c1f6-4f6f-9081-277b29aceb26" />
+<img width="322" height="211" alt="image" src="https://github.com/user-attachments/assets/af6d3b98-4b12-4fb8-adce-d567f51cde00" />
+
+
 3. **Detecção de registros anômalos**
    - Identificação de registros com preços negativos ou fora de faixa plausível, bem como quantidades inválidas.
    - Fundamental para garantir qualidade dos dados antes de análises mais profundas.
+
+<img width="519" height="155" alt="image" src="https://github.com/user-attachments/assets/8f01e065-c5eb-4318-b62f-2276342d6577" />
+<img width="1193" height="521" alt="image" src="https://github.com/user-attachments/assets/67bd0582-81ee-4e13-bd45-05343a008ad9" />
+
 
 ---
 
@@ -169,7 +183,7 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 ### Análise Exploratória em Pandas
 
 #### Descrição da etapa
-- Realizei uma análise exploratória utilizando **Pandas**, **Matplotlib** e **Seaborn** para compreender melhor a base de dados tratada (**`cepea_dados_3.csv`**).
+- Realizei uma análise exploratória arquivo **exploratória/exploratírua.ipynb** para compreender melhor a base de dados tratada (**PROCESSED/`cepea_dados_3.csv`**).
 - Objetivo: gerar estatísticas descritivas, detectar outliers e visualizar padrões nos dados.
 
 #### Principais análises realizadas
@@ -196,7 +210,7 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 
 #### Descrição da etapa
 - Desenvolvi uma aplicação interativa em **Streamlit** para visualização de preços e tendências das commodities.
-- Objetivo: fornecer uma interface intuitiva para exploração dos dados tratados e análises geradas.
+- Objetivo: fornecer uma interface intuitiva para exploração dos dados tratados e análises geradas. arquivo em **Streamlit/app.py**
 
 #### Funcionalidades implementadas
 - **Dashboards interativos** com gráficos de linhas, barras e boxplots.
@@ -207,17 +221,9 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 - **Visualização de tendências**: acompanhamento histórico de preços médios e variações percentuais.
 - **Exploração de dados**: possibilidade de analisar distribuições, identificar outliers e comparar commodities.
 
-#### Tecnologias utilizadas
-- **Streamlit** para construção da interface web.
-- **Pandas** para manipulação dos dados.
-- **Matplotlib / Seaborn / Plotly** para geração dos gráficos interativos.
-
-#### Observações críticas
+#### Observações
 - Streamlit é excelente para prototipagem rápida e exploração interativa, permitindo ajustes em tempo real.
-- A performance pode ser impactada para bases muito grandes — soluções incluem pré-processamento e cache.
 - Melhorias futuras poderiam incluir autenticação, dashboards customizados para diferentes perfis de usuário e integração com APIs em tempo real.
 ---
 
-
-f
 
