@@ -78,6 +78,7 @@ uso de S3 requer planejamento de custos e governança para evitar desperdício e
 - 
 <img width="341" height="401" alt="image" src="https://github.com/user-attachments/assets/6b2a1253-b576-4de7-bd13-9208757537da" />
 <img width="719" height="582" alt="image" src="https://github.com/user-attachments/assets/3c89939b-7539-4ccc-b577-3752f1c14016" />
+
 ---
 ## Tratamento e ETL (Camada Processed)
 
@@ -225,6 +226,7 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 - Streamlit é excelente para prototipagem rápida e exploração interativa, permitindo ajustes em tempo real.
 - Melhorias futuras poderiam incluir autenticação, dashboards customizados para diferentes perfis de usuário e integração com APIs em tempo real.
 ---
+
 
 
 
