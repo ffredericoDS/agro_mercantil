@@ -183,7 +183,7 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 ### Análise Exploratória em Pandas
 
 #### Descrição da etapa
-- Realizei uma análise exploratória arquivo **exploratória/exploratírua.ipynb** para compreender melhor a base de dados tratada (**PROCESSED/`cepea_dados_3.csv`**).
+- Realizei uma análise exploratória arquivo **exploratória/exploratória.ipynb** para compreender melhor a base de dados tratada (**PROCESSED/`cepea_dados_3.csv`**).
 - Objetivo: gerar estatísticas descritivas, detectar outliers e visualizar padrões nos dados.
 
 #### Principais análises realizadas
@@ -225,5 +225,6 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 - Streamlit é excelente para prototipagem rápida e exploração interativa, permitindo ajustes em tempo real.
 - Melhorias futuras poderiam incluir autenticação, dashboards customizados para diferentes perfis de usuário e integração com APIs em tempo real.
 ---
+
 
 
