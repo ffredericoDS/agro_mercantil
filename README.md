@@ -10,6 +10,8 @@
 - **Fonte:** site **CEPEA** — referência em preços e informações sobre commodities agrícolas (soja, milho, trigo, café, arroz, algodão, entre outros).
 - **Tipo de dados:** preços, datas e regiões.
 - **Formato final:** CSV.
+  <img width="1158" height="772" alt="image" src="https://github.com/user-attachments/assets/64421c13-e30d-495d-b134-0963741d1dad" />
+
 
 #### Processo
 - Ferramentas: **Python** (`requests` + `BeautifulSoup`).
@@ -218,3 +220,4 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 
 
 f
+
