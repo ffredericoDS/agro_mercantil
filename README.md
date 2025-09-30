@@ -229,7 +229,22 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 
 ---
 
+### Insights e Documentação
 
+#### Principais Padrões Identificados 
+- **Variação regional**: Cuiabá/MT e Ribeirão Preto/SP tendem a preços mais altos; Paranaguá/PR e Santos/SP mostram maior volatilidade.  
+- **Preço x Quantidade**: grandes volumes costumam pressionar preços para baixo (lei da oferta e demanda).
+- **Sazonalidade**: preços do algodão sobem no fim de 2023, caem no início de 2024 e se recuperam em meados de 2024; arroz apresenta estabilidade maior, mas com leve alta no fim de 2024/início de 2025.  
+- **Anomalias**: registros negativos e picos extremos sugerem erros de digitação, ajustes ou liquidações atípicas.  
 
+#### Aplicações Práticas no Agronegócio
+- **Precificação**: identificar melhores épocas e regiões para venda.  
+- **Gestão de risco**: detectar volatilidade para hedge e seguros agrícolas.  
+- **Logística**: apoiar escolha de rotas e portos (ex.: Santos x Paranaguá).  
+- **Inteligência de mercado**: usar séries históricas como referência para contratos futuros e planejamento de safra.  
 
-
+#### Limitações da Fonte
+- Dados com **erros e valores negativos** em preço/quantidade.  
+- Abrangência restrita (foco em algodão e arroz, poucas regiões).  
+- Falta de **metadados claros** (unidade de medida, origem primária, tipo de preço).  
+- Atualização limitada a registros recentes (sem séries longas prontas).  
