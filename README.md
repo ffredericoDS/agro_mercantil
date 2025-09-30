@@ -222,10 +222,13 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 - **Visualização de tendências**: acompanhamento histórico de preços médios e variações percentuais.
 - **Exploração de dados**: possibilidade de analisar distribuições, identificar outliers e comparar commodities.
 
-#### Observações
-- Streamlit é excelente para prototipagem rápida e exploração interativa, permitindo ajustes em tempo real.
-- Melhorias futuras poderiam incluir autenticação, dashboards customizados para diferentes perfis de usuário e integração com APIs em tempo real.
+<img width="1332" height="853" alt="image" src="https://github.com/user-attachments/assets/7f92a7ee-f75b-4184-b58b-943f3b8a4251" />
+<img width="1557" height="739" alt="image" src="https://github.com/user-attachments/assets/b2af6ad6-b740-4b90-bc43-d601d38f2611" />
+<img width="1596" height="811" alt="image" src="https://github.com/user-attachments/assets/e7dc7ca8-11f7-46da-bb97-05feb544a4a1" />
+<img width="1543" height="778" alt="image" src="https://github.com/user-attachments/assets/77ebe7c9-d5dd-4a96-a9e6-cdd0eb2c5192" />
+
 ---
+
 
 
 
