@@ -67,8 +67,6 @@ uso de S3 requer planejamento de custos e governança para evitar desperdício e
 - O processo foi realizado com scripts SQL, garantindo estrutura adequada para consultas futuras.
 - O preenchimento automático das tabelas foi feito com um script Python **PostgreSQL/`postgre.py`**, que lê o arquivo **RAW/`cepea_dados_2.csv`** e insere os dados diretamente no banco.Automatizar a inserção via script Python aumenta eficiência e reduz erro
 <img width="715" height="390" alt="image" src="https://github.com/user-attachments/assets/e1fb214e-932c-4b3c-a340-ee9b9765a4a3" />
-<img width="341" height="401" alt="image" src="https://github.com/user-attachments/assets/6b2a1253-b576-4de7-bd13-9208757537da" />
-<img width="719" height="582" alt="image" src="https://github.com/user-attachments/assets/3c89939b-7539-4ccc-b577-3752f1c14016" />
 
 ### Estrutura das tabelas
 - **commodities:** tabela com lista única de commodities.
@@ -203,15 +201,19 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 1. **Estatísticas descritivas**
    - Média, mediana e desvio padrão dos preços e quantidades.
    - Permitem compreender tendências centrais e dispersão dos dados.
+<img width="297" height="392" alt="image" src="https://github.com/user-attachments/assets/f871b8ac-8dd4-4263-b3f9-fac6c8f3cedb" />
 
 2. **Detecção de outliers**
    - Utilização do método **IQR** para identificar valores extremos em preços e quantidades(valores maior ou menor que 3 desvio padrao).
    - Identificação fundamental para evitar distorções em análises futuras.
+<img width="339" height="530" alt="image" src="https://github.com/user-attachments/assets/da9fa1f4-0b32-4d39-b5e8-ab78fab163aa" />
 
 3. **Visualizações**
    - **Boxplot**: análise de dispersão e outliers por commodity.
    - **Histogramas**: distribuição de preços e quantidades.
    - **Scatter plot**: relação entre quantidade e preço, segmentada por commodity.
+<img width="907" height="440" alt="image" src="https://github.com/user-attachments/assets/4d742dac-88db-4bd7-bad6-d35d4a34a8eb" />
+<img width="782" height="564" alt="image" src="https://github.com/user-attachments/assets/4a33c6e0-6c0b-47e9-b325-af5b7be76b8f" />
 
 #### Observações
 - A análise exploratória revelou padrões importantes e permitiu validar a qualidade dos dados tratados.
@@ -258,4 +260,5 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 - Abrangência restrita (foco em algodão e arroz, poucas regiões).  
 - Falta de **metadados claros** (unidade de medida, origem primária, tipo de preço).  
 - Atualização limitada a registros recentes (sem séries longas prontas).  
+
 
