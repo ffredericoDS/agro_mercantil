@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import numpy as np
 from datetime import datetime
 import warnings
@@ -141,37 +139,33 @@ with col1:
     preco_medio = df_filtrado['preco'].mean()
     st.metric(
         label="💰 Preço Médio",
-        value=f"R$ {preco_medio:,.2f}",
-        delta=f"{(preco_medio - df['preco'].mean())/df['preco'].mean()*100:.1f}% vs Geral"
+        value=f"R$ {preco_medio:,.2f}"
     )
 
 with col2:
     total_commodities = df_filtrado['commodity'].nunique()
     st.metric(
         label="🌾 Commodities",
-        value=total_commodities,
-        delta=f"{total_commodities - df['commodity'].nunique()}" if total_commodities != df['commodity'].nunique() else None
+        value=total_commodities
     )
 
 with col3:
     volume_total = df_filtrado['volume'].sum()
     st.metric(
         label="📦 Volume Total",
-        value=f"{volume_total:,.0f}",
-        delta=f"R$ {df_filtrado['lucro'].sum():,.0f} Lucro"
+        value=f"{volume_total:,.0f}"
     )
 
 with col4:
     regioes_ativas = df_filtrado['regiao'].nunique()
     st.metric(
         label="🏙️ Regiões Ativas",
-        value=regioes_ativas,
-        delta=f"{regioes_ativas - df['regiao'].nunique()}" if regioes_ativas != df['regiao'].nunique() else None
+        value=regioes_ativas
     )
 
 st.markdown('<div class="section-header">📈 Análise de Tendências</div>', unsafe_allow_html=True)
 
-col1, col2 = st.columns([2, 1])
+col1, _ = st.columns([2, 1])
 
 with col1:
     fig_tendencia = px.line(
@@ -192,23 +186,6 @@ with col1:
     )
     st.plotly_chart(fig_tendencia, use_container_width=True)
 
-with col2:
-    st.markdown("#### 🎯 Heatmap Mensal")
-    pivot_data = df_filtrado.pivot_table(
-        values='preco', 
-        index='commodity', 
-        columns='mes', 
-        aggfunc='mean'
-    ).fillna(0)
-    
-    fig_heatmap = px.imshow(
-        pivot_data,
-        title="Distribuição por Mês",
-        color_continuous_scale="Viridis",
-        aspect="auto"
-    )
-    st.plotly_chart(fig_heatmap, use_container_width=True)
-
 st.markdown('<div class="section-header">📊 Análise Comparativa</div>', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
@@ -227,15 +204,9 @@ with col1:
     st.plotly_chart(fig_box, use_container_width=True)
 
 with col2:
-    volume_por_commodity = df_filtrado.groupby('commodity')[['volume', 'lucro']].sum().reset_index()
+    volume_por_commodity = df_filtrado.groupby('commodity')[['lucro']].sum().reset_index()
     
     fig_barras = go.Figure()
-    fig_barras.add_trace(go.Bar(
-        name='Volume',
-        x=volume_por_commodity['commodity'],
-        y=volume_por_commodity['volume'],
-        marker_color='#4ECDC4'
-    ))
     fig_barras.add_trace(go.Bar(
         name='Lucro',
         x=volume_por_commodity['commodity'],
@@ -244,7 +215,7 @@ with col2:
     ))
     
     fig_barras.update_layout(
-        title='💰 Volume vs Lucro por Commodity',
+        title='💰 Lucro por Commodity',
         barmode='group',
         template='plotly_white',
         height=400
@@ -291,7 +262,7 @@ with col2:
 
 st.markdown('<div class="section-header">💡 Insights Inteligentes</div>', unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns(3)
+col1, col3 = st.columns(2)
 
 with col1:
     st.markdown("""
@@ -301,15 +272,6 @@ with col1:
         <h3>{}</h3>
     </div>
     """.format(df_filtrado.groupby('commodity')['preco'].mean().idxmax()), unsafe_allow_html=True)
-
-with col2:
-    st.markdown("""
-    <div class='feature-box'>
-        <h4>📈 Maior Crescimento</h4>
-        <p>Região com maior valorização</p>
-        <h3>+{:.1f}%</h3>
-    </div>
-    """.format(np.random.uniform(5, 15)), unsafe_allow_html=True)
 
 with col3:
     st.markdown("""
@@ -349,6 +311,5 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #7f8c8d; padding: 2rem;'>
     <p>🌱 <strong>Dashboard CEPEA Analytics</strong> - Desenvolvido para insights inteligentes em commodities agrícolas</p>
-    <p>📊 Última atualização: {}</p>
 </div>
-""".format(datetime.now().strftime("%d/%m/%Y %H:%M")), unsafe_allow_html=True)
+""", unsafe_allow_html=True)
