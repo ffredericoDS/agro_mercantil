@@ -46,8 +46,20 @@
 Para projetos em escala, Parquet seria mais indicado por reduzir espaço e aumentar performance.
 
 ### Organização em AWS S3
-- Estrutura sugerida:
-(imagem aqui)
+local:
+RAW/
+      cepea_dados_1.csv
+      cepea_dados_2.csv
+PROCESSED/
+      cepea_dados_3.csv
+CURATED/
+      cepea_dados_4.csv
+      
+- Estrutura S3:
+s3://meu-datalake/raw/cepea_dados_1.csv
+s3://meu-datalake/raw/cepea_dados_2.csv
+s3://meu-datalake/processed/cepea_dados_3.csv
+s3://meu-datalake/curated/cepea_dados_4.csv
 
 - Vantagens:
   - Escalabilidade e disponibilidade.
@@ -126,6 +138,7 @@ objetivo -- organiza dados em camadas, permitindo melhor governança, rastreabil
 - Contém dados refinados e organizados para consumo final (BI, dashboards, relatórios).
 - Pode incluir agregações, métricas calculadas e modelos aplicados.
 - Objetivo: otimizar performance de análise e tomada de decisão.
+  - foi criado essa pasta , com um arquivo para ela **CURATED/cepea_dados_4.csv**, a partir do script **ETL/elt_curent.py**
 
 <img width="308" height="340" alt="image" src="https://github.com/user-attachments/assets/a10d405b-7d7f-47dd-a908-9db9db66a28c" />
 
@@ -248,3 +261,4 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 - Abrangência restrita (foco em algodão e arroz, poucas regiões).  
 - Falta de **metadados claros** (unidade de medida, origem primária, tipo de preço).  
 - Atualização limitada a registros recentes (sem séries longas prontas).  
+
