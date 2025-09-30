@@ -172,13 +172,22 @@ objetivo -- organiza dados em camadas, permitindo melhor governança, rastreabil
    - Identificação de registros com preços negativos ou fora de faixa plausível, bem como quantidades inválidas.
    - Fundamental para garantir qualidade dos dados antes de análises mais profundas.
 
-<img width="519" height="155" alt="image" src="https://github.com/user-attachments/assets/8f01e065-c5eb-4318-b62f-2276342d6577" />
-<img width="1193" height="521" alt="image" src="https://github.com/user-attachments/assets/67bd0582-81ee-4e13-bd45-05343a008ad9" />
+<img width="510" height="414" alt="image" src="https://github.com/user-attachments/assets/6fc143f6-704f-4176-9cfa-830358806ab3" />
+<img width="1015" height="547" alt="image" src="https://github.com/user-attachments/assets/b84c4f44-9394-4885-bf1a-9756d451056c" />
 
 
 ---
 
 ### Otimização e Indexação
+
+utilizado o EXPLAIN ANALYZE nas 3 query para analisar performance das consultas da questão , olhando principalmente a Execution Time q é o tempo total de execução
+a)
+<img width="890" height="556" alt="image" src="https://github.com/user-attachments/assets/c647fa19-0a08-4e80-8986-fee04f5089aa" />
+b)
+<img width="872" height="474" alt="image" src="https://github.com/user-attachments/assets/3873e00b-8049-40d9-a520-ffd79ea05410" />
+c)
+<img width="891" height="529" alt="image" src="https://github.com/user-attachments/assets/aaf10af0-5fb0-4d00-8a62-ed4396bc6c47" />
+
 
 #### Avaliação de performance
 As consultas realizadas na etapa anterior envolvem `JOIN`, `GROUP BY` e funções analíticas (`LAG`). Essas operações podem ter desempenho impactado em bases grandes, especialmente sem índices adequados.
@@ -186,7 +195,7 @@ As consultas realizadas na etapa anterior envolvem `JOIN`, `GROUP BY` e funçõe
 #### Sugestões de otimização
 - Criar índices compostos nas colunas mais usadas em filtros e agrupamentos (`commodity_id`, `estado`, `ano`, `mes`).
 - Criar índice específico para `commodity_id` para acelerar `JOINs`.
-- Considerar particionamento da tabela `registros_processados` por ano ou commodity em casos de volume elevado.
+- Considerar particionamento da tabela `registros_processados` por ano ou commodity
 - Monitorar consultas usando `EXPLAIN ANALYZE` para validar ganhos de performance.
 
 #### Justificativa
@@ -205,7 +214,7 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
    - Permitem compreender tendências centrais e dispersão dos dados.
 
 2. **Detecção de outliers**
-   - Utilização do método **IQR (Interquartile Range)** para identificar valores extremos em preços e quantidades.
+   - Utilização do método **IQR** para identificar valores extremos em preços e quantidades(valores maior ou menor que 3 desvio padrao).
    - Identificação fundamental para evitar distorções em análises futuras.
 
 3. **Visualizações**
@@ -213,10 +222,9 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
    - **Histogramas**: distribuição de preços e quantidades.
    - **Scatter plot**: relação entre quantidade e preço, segmentada por commodity.
 
-#### Observações críticas
+#### Observações
 - A análise exploratória revelou padrões importantes e permitiu validar a qualidade dos dados tratados.
-- A identificação de outliers é essencial, mas deve ser complementada com análise contextual — alguns valores extremos podem refletir variações reais de mercado.
-- Visualizações facilitam interpretação e comunicação dos resultados, especialmente em etapas posteriores de análise ou apresentação para stakeholders.
+- Visualizações facilita muito para interpretação e comunicação dos resultados
 
 ---
 ### Visualização em Streamlit
@@ -252,7 +260,6 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 #### Aplicações Práticas no Agronegócio
 - **Precificação**: identificar melhores épocas e regiões para venda.  
 - **Gestão de risco**: detectar volatilidade para hedge e seguros agrícolas.  
-- **Logística**: apoiar escolha de rotas e portos (ex.: Santos x Paranaguá).  
 - **Inteligência de mercado**: usar séries históricas como referência para contratos futuros e planejamento de safra.  
 
 #### Limitações da Fonte
@@ -260,4 +267,3 @@ Essas otimizações melhoram o tempo de resposta das consultas, reduzem custo co
 - Abrangência restrita (foco em algodão e arroz, poucas regiões).  
 - Falta de **metadados claros** (unidade de medida, origem primária, tipo de preço).  
 - Atualização limitada a registros recentes (sem séries longas prontas).  
-
