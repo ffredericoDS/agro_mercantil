@@ -17,7 +17,7 @@
 - Ferramentas: **Python** (`requests` + `BeautifulSoup`).
 - Script principal: **Scraping/`1 - Scraping.py`**.
 - Função: extrair tabelas, tratar preços e datas, salvar dados.
-- Desafios enfrentados: tabelas fragmentadas e necessidade de padronização.
+- Desafios enfrentados: tabelas fragmentadas , necessidade de padronização , inconsistências nos dados. 
 
 #### Dificuldades e Soluções
 - O site exibia apenas dados recentes (últimos 13 a 30 dias).
@@ -74,7 +74,7 @@ uso de S3 requer planejamento de custos e governança para evitar desperdício e
 ### Descrição da etapa
 - Criei tabelas normalizadas a partir dos dados coletados, separando informações de **commodities** e **registros** para melhorar organização e eficiência.
 - O processo foi realizado com scripts SQL, garantindo estrutura adequada para consultas futuras.
-- O preenchimento automático das tabelas foi feito com um script Python **PostgreSQL/`postgre.py`**, que lê o arquivo **RAW/`cepea_dados_2.csv`** e insere os dados diretamente no banco.Automatizar a inserção via script Python aumenta eficiência e reduz erro humano
+- O preenchimento automático das tabelas foi feito com um script Python **PostgreSQL/`postgre.py`**, que lê o arquivo **RAW/`cepea_dados_2.csv`** e insere os dados diretamente no banco.Automatizar a inserção via script Python aumenta eficiência e reduz erro
 <img width="715" height="390" alt="image" src="https://github.com/user-attachments/assets/e1fb214e-932c-4b3c-a340-ee9b9765a4a3" />
 <img width="341" height="401" alt="image" src="https://github.com/user-attachments/assets/6b2a1253-b576-4de7-bd13-9208757537da" />
 <img width="719" height="582" alt="image" src="https://github.com/user-attachments/assets/3c89939b-7539-4ccc-b577-3752f1c14016" />
@@ -114,8 +114,7 @@ uso de S3 requer planejamento de custos e governança para evitar desperdício e
 <img width="1104" height="592" alt="image" src="https://github.com/user-attachments/assets/4e65fe82-392c-48e5-b2ac-32b967c11581" />
 
 ### observação da etapa:
-- O processo ETL garante que o banco contenha dados consistentes e organizados, essenciais para consultas eficientes.
-- Automatizar o ETL reduz erros manuais e facilita a atualização da base.
+- O processo ETL foi necessario para manter os dados consistentes e organizados, essenciais para consultas eficientes.
 
 ---
 
@@ -145,7 +144,7 @@ objetivo -- organiza dados em camadas, permitindo melhor governança, rastreabil
 ### Observação 
 - Separar dados em camadas melhora rastreabilidade e facilita manutenção.
 - Essa organização facilita integração com ferramentas analíticas e sistemas em nuvem.
-- Em escala, o Data Lake pode ser hospedado em **AWS S3**, **Azure Data Lake** ou similar, com gerenciamento de versionamento
+- Em escala, o Data Lake pode ser hospedado em **AWS S3** , com gerenciamento de versionamento
 
 ---
 ## Análises SQL – Tendências e Indicadores
